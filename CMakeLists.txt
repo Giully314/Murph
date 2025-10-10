@@ -10,16 +10,25 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 
+include(FetchContent)
+
+FetchContent_Declare(
+    minifb
+    GIT_REPOSITORY https://github.com/emoon/minifb.git
+    GIT_TAG master
+)
+
+FetchContent_MakeAvailable(minifb)
+
 # TODO: set build or release
 
 # TODO: set compiler flags
-
-add_subdirectory(src)
-
-
 # enable_testing()
 # add_subdirectory(tests)
 
+add_subdirectory(src)
 add_executable(main)
 target_sources(main PRIVATE main.cpp)
-# target_link_libraries(main PRIVATE tars)
+target_link_libraries(main PRIVATE minifb murph murph_canvas)
+
+
