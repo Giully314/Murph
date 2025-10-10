@@ -17,25 +17,29 @@ struct Pixel {
     explicit constexpr Pixel() = default;
 
     explicit constexpr Pixel(const u32 color) : 
+        b{static_cast<u8>(color >> 8 & 0xff)},
         r{static_cast<u8>(color >> 24 & 0xff)}, 
         g{static_cast<u8>(color >> 16 & 0xff)},
-        b{static_cast<u8>(color >> 8 & 0xff)},
         a{static_cast<u8>(color >> 0 & 0xff)} {} 
 
-    explicit constexpr Pixel(const u8 r_, const u8 g_, const u8 b_, const u8 a_) : 
-        r{r_}, 
-        g{g_},
+    explicit constexpr Pixel(const u8 b_, const u8 g_, const u8 r_, const u8 a_) : 
         b{b_},
+        g{g_},
+        r{r_}, 
         a{a_} {}
 
-    u8 r{0};
-    u8 g{0};
     u8 b{0};
+    u8 g{0};
+    u8 r{0};
     u8 a{255};
 };  
 
 inline constexpr Pixel white {255_u8, 255_u8, 255_u8, 255_u8};
 inline constexpr Pixel black {0_u8, 0_u8, 0_u8, 255_u8};
+inline constexpr Pixel red {0_u8, 0_u8, 255_u8, 255_u8};
+inline constexpr Pixel blue {255_u8, 0_u8, 0_u8, 255_u8};
+inline constexpr Pixel green {0_u8, 255_u8, 0_u8, 255_u8};
+
 
 
 } // namespace murph::canvas

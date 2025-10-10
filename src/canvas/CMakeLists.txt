@@ -7,9 +7,9 @@ target_sources(murph_canvas
     canvaspixel.cppm
     )
 
-# target_sources(canvas
-#     PUBLIC FILES
- 
+# target_sources(murph_canvas
+#     PUBLIC 
+#     canvasrenderer.cpp
 #     )
 
 
