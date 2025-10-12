@@ -44,20 +44,24 @@ public:
 
         const f32 length = x2-x1;
         const f32 height = y2 - y1;
+        const f32 lh = height / length;
+        f32 y = y1;
 
-        for (i32 x = x1; x <= x2; ++x) {
-            f32 t = (x - x1) / length;
-            i32 y = std::round(y1 + height * t);
-            
-            if (steep) {
-                context[x, y] = color;
-            } else {
-                context[y, x] = color;
+        if (steep) {
+            for (u32 x = static_cast<u32>(x1); x <= static_cast<u32>(x2); ++x) {
+                context[x, static_cast<u32>(y)] = color;
+                y += lh;
+            }
+        } else {
+            for (u32 x = static_cast<u32>(x1); x <= static_cast<u32>(x2); ++x) {
+                context[static_cast<u32>(y), x] = color;
+                y += lh;
             }
         }
     }
     
-private:
+
+public:
     Context& context;
 };
     
