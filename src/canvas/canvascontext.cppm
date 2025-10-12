@@ -26,7 +26,7 @@ public:
 
     // Access the pixel at row i and column j.
     template <typename Self>
-    [[nodiscard]] constexpr auto&& operator[](this Self&& self, u32 i, u32 j) {
+    [[nodiscard]] constexpr auto&& operator[](this Self&& self, const u32 i, const u32 j) {
         return std::forward<Self>(self).screen_buffer[i * self.width + j];
     }
 
