@@ -5,6 +5,7 @@ PUBLIC FILE_SET CXX_MODULES FILES
 types.cppm)
 
 add_subdirectory(canvas)
+add_subdirectory(math)
 
 add_library(murph)
 target_sources(murph
