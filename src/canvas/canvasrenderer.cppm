@@ -51,7 +51,7 @@ public:
             for (u32 x = static_cast<u32>(x1); x <= static_cast<u32>(x2); ++x) {
                 context[x, static_cast<u32>(y)] = color;
                 y += lh;
-            }
+            } 
         } else {
             for (u32 x = static_cast<u32>(x1); x <= static_cast<u32>(x2); ++x) {
                 context[static_cast<u32>(y), x] = color;
