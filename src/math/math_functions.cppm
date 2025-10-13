@@ -64,16 +64,13 @@ struct Projection
 	{
 		Mat4d<T> ortho;
 
-		ortho(0, 0) = static_cast<T>(2) / (r - l);
-		ortho(0, 3) = -(r + l) / (r - l);
-
-		ortho(1, 1) = static_cast<T>(2) / (t - b);
-		ortho(1, 3) = -(t + b) / (t - b);
-
-		ortho(2, 2) = -static_cast<T>(2) / (f - n);
-		ortho(2, 3) = -(f + n) / (f - n);
-
-		ortho(3, 3) = static_cast<T>(1);
+		ortho[0, 0] = static_cast<T>(2) / (r - l);
+		ortho[0, 3] = -(r + l) / (r - l);
+		ortho[1, 1] = static_cast<T>(2) / (t - b);
+		ortho[1, 3] = -(t + b) / (t - b);
+		ortho[2, 2] = -static_cast<T>(2) / (f - n);
+		ortho[2, 3] = -(f + n) / (f - n);
+		ortho[3, 3] = static_cast<T>(1);
 
 		return ortho;
 	}
@@ -85,17 +82,32 @@ struct Projection
 	{
 		Mat4d<T> ortho;
 
-		ortho(0, 0) = static_cast<T>(2) / (r - l);
-		ortho(0, 3) = -(r + l) / (r - l);
-
-		ortho(1, 1) = static_cast<T>(2) / (t - b);
-		ortho(1, 3) = -(t + b) / (t - b);
-
-		ortho(2, 2) = -static_cast<T>(1);
-
-		ortho(3, 3) = static_cast<T>(1);
+		ortho[0, 0] = static_cast<T>(2) / (r - l);
+		ortho[0, 3] = -(r + l) / (r - l);
+		ortho[1, 1] = static_cast<T>(2) / (t - b);
+		ortho[1, 3] = -(t + b) / (t - b);
+		ortho[2, 2] = -static_cast<T>(1);
+		ortho[3, 3] = static_cast<T>(1);
 
 		return ortho;
+	}
+
+
+	template <CIsArithmetic T>
+	[[nodiscard]]
+	static constexpr auto Viewport(const T width, const T height) -> Mat4d<T> {
+		const auto c1 = static_cast<T>(1);
+		const auto c2 = static_cast<T>(2);
+
+		Mat4d<T> viewport{c1};
+
+		viewport[0, 0] = width / c2;
+		viewport[0, 3] = (width - c1) / c2;
+
+		viewport[1, 1] = height / c2;
+		viewport[1, 3] = (height - c1) / c2;
+
+		return viewport;
 	}
 };
 

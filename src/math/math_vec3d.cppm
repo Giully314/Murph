@@ -180,3 +180,16 @@ constexpr auto operator/(Vec3d<T> lhs, const T c) -> Vec3d<T>
 
 } //namespace murph::math
 
+
+// ********************* CUSTOM FORMATTER **************************
+
+template <typename T>
+struct std::formatter<murph::math::Vec3d<T>> {
+    constexpr auto parse(std::format_parse_context& ctx) {
+        return ctx.begin();
+    }
+
+    auto format(const murph::math::Vec3d<T>& obj, std::format_context& ctx) const {
+        return std::format_to(ctx.out(), "({}, {}, {})", obj.x, obj.y, obj.z);
+    }
+};

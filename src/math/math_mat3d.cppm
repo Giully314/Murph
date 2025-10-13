@@ -187,28 +187,28 @@ using Mat3df = Mat3d<f32>;
 template <CIsArithmetic T>
 [[nodiscard]]
 constexpr auto operator+(const Mat3d<T>& lhs, const Mat3d<T>& rhs) noexcept -> Mat3d<T> {
-	return Mat3d<T>{ lhs(0) + rhs(0), lhs(1) + rhs(1), lhs(2) + rhs(2) };
+	return Mat3d<T>{ lhs[0] + rhs[0], lhs[1] + rhs[1], lhs[2] + rhs[2] };
 }
 
 
 template <CIsArithmetic T>
 [[nodiscard]]
 constexpr auto operator-(const Mat3d<T>& lhs, const Mat3d<T>& rhs) noexcept -> Mat3d<T> {
-	return Mat3d<T>{ lhs(0) - rhs(0), lhs(1) - rhs(1), lhs(2) - rhs(2) };
+	return Mat3d<T>{ lhs[0] - rhs[0], lhs[1] - rhs[1], lhs[2] - rhs[2] };
 }
 
 
 template <CIsArithmetic T>
 [[nodiscard]]
 constexpr auto operator*(const Mat3d<T>& lhs, const T c) noexcept -> Mat3d<T> {
-	return Mat3d<T>{ lhs(0) * c, lhs(1) * c, lhs(2) * c };
+	return Mat3d<T>{ lhs[0] * c, lhs[1] * c, lhs[2] * c };
 }
 
 
 template <CIsArithmetic T>
 [[nodiscard]]
 constexpr auto operator/(const Mat3d<T>& lhs, const T c) -> Mat3d<T> {
-	return Mat3d<T>{ lhs(0) / c, lhs(1) / c, lhs(2) / c };
+	return Mat3d<T>{ lhs[0] / c, lhs[1] / c, lhs[2] / c };
 }
 
 
@@ -223,7 +223,7 @@ constexpr auto operator*(Mat3d<T> lhs, const Mat3d<T>& rhs) noexcept -> Mat3d<T>
 template <CIsArithmetic T>
 [[nodiscard]]
 constexpr auto operator*(const Mat3d<T>& lhs, const Vec3d<T>& rhs) noexcept -> Vec3d<T> {
-	return Mat3d<T>{ lhs(0).Dot(rhs), lhs(1).Dot(rhs), lhs(2).Dot(rhs) };
+	return Vec3d<T>{ lhs[0].Dot(rhs), lhs[1].Dot(rhs), lhs[2].Dot(rhs) };
 }
 
 } //namespace murph::math

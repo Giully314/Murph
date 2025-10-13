@@ -113,6 +113,7 @@ public:
 	T y{ 0 };
 }; 
 
+
 /**************** TYPE ALIAS ************************/
 using Vec2di = Vec2d<i32>;
 using Vec2du = Vec2d<u32>;
@@ -175,3 +176,15 @@ constexpr auto operator-(const Vec2d<T>& v) noexcept -> Vec2d<T>
 
 } //namespace murph::math
 
+
+
+template <typename T>
+struct std::formatter<murph::math::Vec2d<T>> {
+    constexpr auto parse(std::format_parse_context& ctx) {
+        return ctx.begin();
+    }
+
+    auto format(const murph::math::Vec2d<T>& obj, std::format_context& ctx) const {
+        return std::format_to(ctx.out(), "({}, {})", obj.x, obj.y);
+    }
+};

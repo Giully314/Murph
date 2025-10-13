@@ -71,7 +71,6 @@ public:
 		return std::forward<Self>(self).m[i];
 	}
 
-	[[nodiscard]]
 	constexpr auto operator+=(const Mat4d& rhs) noexcept -> Mat4d& {
 		m[0] += rhs.m[0];
 		m[1] += rhs.m[1];
@@ -80,7 +79,6 @@ public:
 		return *this;
 	}
 
-	[[nodiscard]]
 	constexpr auto operator-=(const Mat4d& rhs) noexcept -> Mat4d& {
 		m[0] -= rhs.m[0];
 		m[1] -= rhs.m[1];
@@ -89,7 +87,6 @@ public:
 		return *this;
 	}
 
-	[[nodiscard]]
 	constexpr auto operator*=(const T c) noexcept -> Mat4d& {
 		m[0] *= c;
 		m[1] *= c;
@@ -98,7 +95,6 @@ public:
 		return *this;
 	}
 
-	[[nodiscard]]
 	constexpr auto operator*=(const Mat4d& rhs) noexcept -> Mat4d& {
 		m[0] = m[0][0] * rhs.m[0] + m[0][1] * rhs.m[1] + m[0][2] * rhs.m[2] + m[0][3] * rhs.m[3];
 		m[1] = m[1][0] * rhs.m[0] + m[1][1] * rhs.m[1] + m[1][2] * rhs.m[2] + m[1][3] * rhs.m[3];
@@ -108,7 +104,6 @@ public:
 		return *this;
 	}
 
-	[[nodiscard]]
 	constexpr auto operator/=(const T c) -> Mat4d& {
 		m[0] /= c;
 		m[1] /= c;
@@ -247,7 +242,7 @@ template <CIsArithmetic T>
 [[nodiscard]]
 constexpr auto operator+(const Mat4d<T>& lhs, const Mat4d<T>& rhs) noexcept -> Mat4d<T>
 {
-	return Mat4d<T>{ lhs(0) + rhs(0), lhs(1) + rhs(1), lhs(2) + rhs(2), lhs(3) + rhs(3) };
+	return Mat4d<T>{ lhs[0] + rhs[0], lhs[1] + rhs[1], lhs[2] + rhs[2], lhs[3] + rhs[3] };
 }
 
 
@@ -255,7 +250,7 @@ template <CIsArithmetic T>
 [[nodiscard]]
 constexpr auto operator-(Mat4d<T> lhs, const Mat4d<T>& rhs) noexcept -> Mat4d<T>
 {
-	return Mat4d<T>{ lhs(0) - rhs(0), lhs(1) - rhs(1), lhs(2) - rhs(2), lhs(3) - rhs(3) };
+	return Mat4d<T>{ lhs[0] - rhs[0], lhs[1] - rhs[1], lhs[2] - rhs[2], lhs[3] - rhs[3] };
 }
 
 
@@ -263,7 +258,7 @@ template <CIsArithmetic T>
 [[nodiscard]]
 constexpr auto operator*(Mat4d<T> lhs, const T c) noexcept -> Mat4d<T>
 {
-	return Mat4d<T>{ lhs(0) * c, lhs(1) * c, lhs(2) * c, lhs(3) * c };
+	return Mat4d<T>{ lhs[0] * c, lhs[1] * c, lhs[2] * c, lhs[3] * c };
 }
 
 
@@ -271,7 +266,7 @@ template <CIsArithmetic T>
 [[nodiscard]]
 constexpr auto operator/(Mat4d<T> lhs, const T c) -> Mat4d<T>
 {
-	return Mat4d<T>{ lhs(0) / c, lhs(1) / c, lhs(2) / c, lhs(3) / c };
+	return Mat4d<T>{ lhs[0] / c, lhs[1] / c, lhs[2] / c, lhs[3] / c };
 }
 
 
@@ -286,9 +281,8 @@ constexpr auto operator*(Mat4d<T> lhs, const Mat4d<T>& rhs) noexcept -> Mat4d<T>
 
 template <CIsArithmetic T>
 [[nodiscard]]
-constexpr auto operator*(const Mat4d<T>& lhs, const Vec4d<T>& rhs) noexcept -> Vec4d<T>
-{
-	return Vec4d<T>{ lhs(0).Dot(rhs), lhs(1).Dot(rhs), lhs(2).Dot(rhs), lhs(3).Dot(rhs) };
+constexpr auto operator*(const Mat4d<T>& lhs, const Vec4d<T>& rhs) noexcept -> Vec4d<T> {
+	return Vec4d<T>{ lhs[0].Dot(rhs), lhs[1].Dot(rhs), lhs[2].Dot(rhs), lhs[3].Dot(rhs) };
 }
 
 } //namespace murph::math

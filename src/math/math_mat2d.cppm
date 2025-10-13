@@ -162,40 +162,35 @@ using Mat2df = Mat2d<f32>;
 
 template <CIsArithmetic T>
 [[nodiscard]]
-constexpr auto operator+(const Mat2d<T>& lhs, const Mat2d<T>& rhs) noexcept -> Mat2d<T>
-{
-	return Mat2d<T>{ lhs(0) + rhs(0), lhs(1) + rhs(1) };
+constexpr auto operator+(const Mat2d<T>& lhs, const Mat2d<T>& rhs) noexcept -> Mat2d<T> {
+	return Mat2d<T>{ lhs[0] + rhs[0], lhs[1] + rhs[1] };
 }
 
 
 template <CIsArithmetic T>
 [[nodiscard]]
-constexpr auto operator-(const Mat2d<T>& lhs, const Mat2d<T>& rhs) noexcept -> Mat2d<T>
-{
-	return Mat2d<T>{ lhs(0) - rhs(0), lhs(1) - rhs(1) };
+constexpr auto operator-(const Mat2d<T>& lhs, const Mat2d<T>& rhs) noexcept -> Mat2d<T> {
+	return Mat2d<T>{ lhs[0] - rhs[0], lhs[1] - rhs[1] };
 }
 
 
 template <CIsArithmetic T>
 [[nodiscard]]
-constexpr auto operator*(Mat2d<T> lhs, const T c) -> Mat2d<T>
-{
-	return Mat2d<T>{ lhs(0) * c, lhs(1) * c };
+constexpr auto operator*(Mat2d<T> lhs, const T c) -> Mat2d<T> {
+	return Mat2d<T>{ lhs[0] * c, lhs[1] * c };
 }
 
 
 template <CIsArithmetic T>
 [[nodiscard]]
-constexpr auto operator/(const Mat2d<T>& lhs, const T c) -> Mat2d<T>
-{
-	return Mat2d<T>{ lhs(0) / c, lhs(1) / c };
+constexpr auto operator/(const Mat2d<T>& lhs, const T c) -> Mat2d<T> {
+	return Mat2d<T>{ lhs[0] / c, lhs[1] / c };
 }
 
 
 template <CIsArithmetic T>
 [[nodiscard]]
-constexpr auto operator*(Mat2d<T> lhs, const Mat2d<T>& rhs) noexcept -> Mat2d<T>
-{
+constexpr auto operator*(Mat2d<T> lhs, const Mat2d<T>& rhs) noexcept -> Mat2d<T> {
 	lhs *= rhs;
 	return lhs;
 }
@@ -203,9 +198,8 @@ constexpr auto operator*(Mat2d<T> lhs, const Mat2d<T>& rhs) noexcept -> Mat2d<T>
 
 template <CIsArithmetic T>
 [[nodiscard]]
-constexpr auto operator*(const Mat2d<T>& lhs, const Vec2d<T>& rhs) noexcept -> Vec2d<T>
-{
-	return Mat2d<T>{ lhs(0).Dot(rhs), lhs(1).Dot(rhs) };
+constexpr auto operator*(const Mat2d<T>& lhs, const Vec2d<T>& rhs) noexcept -> Vec2d<T> {
+	return Vec2d<T>{ lhs(0).Dot(rhs), lhs(1).Dot(rhs) };
 }
 
 } //namespace murph::math
