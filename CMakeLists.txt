@@ -29,6 +29,6 @@ FetchContent_MakeAvailable(minifb)
 add_subdirectory(src)
 add_executable(main)
 target_sources(main PRIVATE main.cpp)
-target_link_libraries(main PRIVATE minifb murph murph_canvas)
+target_link_libraries(main PRIVATE minifb murph)
 
 
