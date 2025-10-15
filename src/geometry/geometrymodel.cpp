@@ -42,6 +42,36 @@ Mesh::Mesh(std::filesystem::path filename) {
         }
     }
 
+    // std::ifstream in;
+    // in.open(filename, std::ifstream::in);
+    // if (in.fail()) return;
+    // std::string line;
+    // while (!in.eof()) {
+    //     std::getline(in, line);
+    //     std::istringstream iss(line.c_str());
+    //     char trash;
+    //     if (!line.compare(0, 2, "v ")) {
+    //         iss >> trash;
+    //         Vec4df v;
+    //         for (int i : {0,1,2}) iss >> v[i];
+    //         v.w = 1.0f;
+    //         vertices.push_back(v);
+    //     } else if (!line.compare(0, 2, "f ")) {
+    //         int f,t,n, cnt = 0;
+    //         iss >> trash;
+    //         std::vector<u32> v;
+    //         while (iss >> f >> trash >> t >> trash >> n) {
+    //             v.push_back(--f);
+    //             cnt++;
+    //         }
+    //         triangles.emplace_back(std::array<u32, 3>{v[0], v[1], v[2]});
+    //         if (3!=cnt) {
+    //             std::cerr << "Error: the obj file is supposed to be triangulated" << std::endl;
+    //             return;
+    //         }
+    //     }
+    // }
+
 }
     
 } // namespace murph::geometry
