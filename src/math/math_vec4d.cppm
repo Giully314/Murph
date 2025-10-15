@@ -198,6 +198,18 @@ constexpr auto operator*(const T c, const Vec4d<T>& lhs) noexcept -> Vec4d<T>
 	return Vec4d<T>{ c * lhs.x, c * lhs.y, c * lhs.z, c * lhs.w };
 }
 
+/// @brief Hadamard product between two vectors.
+/// @param lhs 
+/// @param rhs 
+/// @return A new vector where each component is the product of the components of the two vectors.
+template <CIsArithmetic T>
+[[nodiscard]]
+constexpr auto operator*(const Vec4d<T>& lhs, const Vec4d<T>& rhs) noexcept -> Vec4d<T> {
+	return Vec4d<T>{ lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z, lhs.w * rhs.w};
+}
+
+
+
 
 template <CIsArithmetic T>
 [[nodiscard]]
