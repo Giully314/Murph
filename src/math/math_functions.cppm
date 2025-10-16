@@ -102,10 +102,23 @@ struct Projection
 		Mat4d<T> viewport{c1};
 
 		viewport[0, 0] = width / c2;
-		viewport[0, 3] = (width - c1) / c2;
+		viewport[0, 3] = width / c2;
 
 		viewport[1, 1] = height / c2;
-		viewport[1, 3] = (height - c1) / c2;
+		viewport[1, 3] = height / c2;
+
+		return viewport;
+	}
+
+	template <CIsArithmetic T>
+	[[nodiscard]]
+	static constexpr auto Viewport(const T width, const T height, const T depth) -> Mat4d<T> {
+		auto viewport = Viewport(width, height);
+		const auto c1 = static_cast<T>(1);
+		const auto c2 = static_cast<T>(2);
+
+		viewport[2, 2] = depth / c2;
+		viewport[2, 3] = depth / c2;
 
 		return viewport;
 	}
