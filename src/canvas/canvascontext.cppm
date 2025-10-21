@@ -27,7 +27,7 @@ public:
     /// @param width_ Width of the context.
     /// @param height_ Height of the context.
     explicit constexpr Context(const u32 width_, const u32 height_) : 
-        screen_buffer{std::make_unique<Pixel[]>(width_ * height_)}, zbuffer{std::make_unique<u8[]>(width_ * height_)},
+        screen_buffer{std::make_unique<Pixel[]>(width_ * height_)}, zbuffer{std::make_unique<f32[]>(width_ * height_)},
         width{width_},
         height{height_} { }
 
@@ -58,7 +58,7 @@ public:
     /// @param j 
     /// @return 
     [[nodiscard]]
-    constexpr auto ZBuffer(const u32 i, const u32 j) const -> u16 {
+    constexpr auto ZBuffer(const u32 i, const u32 j) const -> f32 {
         return zbuffer[i * width + j];
     }
 
@@ -66,7 +66,7 @@ public:
     /// @param i 
     /// @param j 
     /// @param c 
-    constexpr auto ZBuffer(u32 i, u32 j, const u8 c) -> void {
+    constexpr auto ZBuffer(u32 i, u32 j, const f32 c) -> void {
         zbuffer[i * width + j] = c;
     }
 
@@ -91,7 +91,7 @@ public:
 
 private:
     std::unique_ptr<Pixel[]> screen_buffer;
-    std::unique_ptr<u8[]> zbuffer;
+    std::unique_ptr<f32[]> zbuffer;
     u32 width;
     u32 height;
 };
