@@ -57,7 +57,6 @@ public:
 		throw std::out_of_range{ "Vec4d access error" };
 	}
 	
-	[[nodiscard]]
 	constexpr auto operator+=(const Vec4d& rhs) noexcept -> Vec4d& {
 		x += rhs.x;
 		y += rhs.y;
@@ -66,7 +65,6 @@ public:
 		return *this;
 	}
 
-	[[nodiscard]]
 	constexpr auto operator-=(const Vec4d& rhs) noexcept -> Vec4d& {
 		x -= rhs.x;
 		y -= rhs.y;
@@ -75,7 +73,6 @@ public:
 		return *this;
 	}
 
-	[[nodiscard]]
 	constexpr auto operator*=(const T c) noexcept -> Vec4d& {
 		x *= c;
 		y *= c;
@@ -84,7 +81,6 @@ public:
 		return *this;
 	}
 
-	[[nodiscard]]
 	constexpr auto operator/=(const T c) -> Vec4d& {
 		x /= c;
 		y /= c;
