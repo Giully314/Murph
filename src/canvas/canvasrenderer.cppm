@@ -139,7 +139,7 @@ public:
                 // Note that alpha + beta + gamma = 1.    
                 
                 // Compute the depth and update the zbuffer.
-                u8 z = static_cast<u8>(alpha * z1 + beta * z2 + gamma * z3);
+                auto z = static_cast<f32>(alpha * z1 + beta * z2 + gamma * z3);
                 if (z <= context.ZBuffer(y, x)) continue;
                 context.ZBuffer(y, x, z);
                 context[y, x] = alpha * color1 + beta * color2 + gamma * color3;
