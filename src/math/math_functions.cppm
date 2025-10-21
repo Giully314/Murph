@@ -27,25 +27,28 @@ struct Product
 {
 	template <CIsArithmetic T>
 	[[nodiscard]]
-	static constexpr auto Dot(const Vec2d<T>& v1, const Vec2d<T>& v2) noexcept -> T
-	{
+	static constexpr auto Dot(const Vec2d<T>& v1, const Vec2d<T>& v2) noexcept -> T {
 		return v1.Dot(v2);
 	}
 
 
 	template <CIsArithmetic T>
 	[[nodiscard]]
-	static constexpr auto Hadamard(const Vec2d<T>& v1, const Vec2d<T>& v2) noexcept -> Vec2d<T>
-	{
+	static constexpr auto Hadamard(const Vec2d<T>& v1, const Vec2d<T>& v2) noexcept -> Vec2d<T> {
 		return { v1.x * v2.x, v1.y * v2.y };
 	}
 
 
 	template <CIsArithmetic T>
 	[[nodiscard]]
-	static constexpr auto Cross(const Vec2d<T>& v1, const Vec2d<T>& v2) noexcept -> T
-	{
+	static constexpr auto Cross(const Vec2d<T>& v1, const Vec2d<T>& v2) noexcept -> T {
 		return v1.x * v2.y - v1.y * v2.x;
+	}
+
+	template <CIsArithmetic T>
+	[[nodiscard]]
+	static constexpr auto Cross(const Vec3d<T>& v1, const Vec3d<T>& v2) noexcept -> Vec3d<T> {
+		return Vec3d<T>{v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y * v2.x};
 	}
 };
 
@@ -122,6 +125,18 @@ struct Projection
 
 		return viewport;
 	}
+
+
+	// This is a simplified version of the perspective matrix.
+	template <CIsArithmetic T>
+	[[nodiscard]]
+	static constexpr auto Perspective(const T f) -> Mat4d<T> {
+		math::Mat4d<T> m{static_cast<T>(1)};
+
+		m[3, 2] = -static_cast<T>(1)/f;
+
+		return m;
+	}
 };
 
 //*********************** PROJECTION *********************************************
@@ -138,16 +153,13 @@ struct Transform3d
 	{
 		Mat4d<T> translation;
 
-		translation(0, 0) = static_cast<T>(1);
-		translation(0, 3) = v.x;
-
-		translation(1, 1) = static_cast<T>(1);
-		translation(1, 3) = v.y;
-
-		translation(2, 2) = static_cast<T>(1);
-		translation(2, 3) = v.z;
-
-		translation(3, 3) = static_cast<T>(1);
+		translation[0, 0] = static_cast<T>(1);
+		translation[0, 3] = v.x;
+		translation[1, 1] = static_cast<T>(1);
+		translation[1, 3] = v.y;
+		translation[2, 2] = static_cast<T>(1);
+		translation[2, 3] = v.z;
+		translation[3, 3] = static_cast<T>(1);
 
 		return translation;
 	}
@@ -161,15 +173,29 @@ struct Transform3d
 		T s = std::sin(a);
 		Mat4d<T> rotation;
 
-		rotation(0, 0) = c;
-		rotation(0, 1) = -s;
+		rotation[0, 0] = c;
+		rotation[0, 1] = -s;
+		rotation[1, 0] = s;
+		rotation[1, 1] = c;
+		rotation[2, 2] = static_cast<T>(1);
+		rotation[3, 3] = static_cast<T>(1);
 
-		rotation(1, 0) = s;
-		rotation(1, 1) = c;
+		return rotation;
+	}
 
-		rotation(2, 2) = static_cast<T>(1);
+	template <CIsArithmetic T>
+	[[nodiscard]]
+	static constexpr auto Rotate(const T a) noexcept -> Mat4d<T>
+	{
+		T c = std::cos(a);
+		T s = std::sin(a);
+		Mat4d<T> rotation{static_cast<T>(1)};
 
-		rotation(3, 3) = static_cast<T>(1);
+		rotation[0, 0] = c;
+		rotation[0, 2] = s;
+
+		rotation[2, 0] = -s;
+		rotation[2, 2] = c;
 
 		return rotation;
 	}
@@ -181,7 +207,7 @@ struct Transform3d
 	{
 		Mat4d<T> scale{ c };
 
-		scale(3, 3) = static_cast<T>(1);
+		scale[3, 3] = static_cast<T>(1);
 
 		return scale;
 	}
